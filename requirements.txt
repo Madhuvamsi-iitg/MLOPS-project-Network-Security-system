@@ -8,4 +8,7 @@ scikit-learn
 dill
 Pyaml
 mlflow
+dagshub
+fastapi
+uvicorn
 ##-e .
