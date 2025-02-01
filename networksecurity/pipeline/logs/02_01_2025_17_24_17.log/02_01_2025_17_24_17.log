@@ -1,0 +1,6 @@
+[ 2025-02-01 17:24:19,792 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2025-02-01 17:24:19,808 ] 107 dagshub - INFO - Accessing as Madhuvamsi-iitg
+[ 2025-02-01 17:24:20,340 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/Madhuvamsi-iitg/MLOPS-project-Network-Security-system "HTTP/1.1 200 OK"
+[ 2025-02-01 17:24:20,827 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2025-02-01 17:24:20,827 ] 107 dagshub - INFO - Initialized MLflow to track repo "Madhuvamsi-iitg/MLOPS-project-Network-Security-system"
+[ 2025-02-01 17:24:20,847 ] 107 dagshub - INFO - Repository Madhuvamsi-iitg/MLOPS-project-Network-Security-system initialized!
