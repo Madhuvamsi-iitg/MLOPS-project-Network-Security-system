@@ -62,9 +62,25 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: latest
         run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # Ensure AWS ECR login
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+          
+          # Enable BuildKit
+          export DOCKER_BUILDKIT=1
+          
+          # Debugging: Print environment variables
+          echo "ECR_REGISTRY: $ECR_REGISTRY"
+          echo "ECR_REPOSITORY: $ECR_REPOSITORY"
+          echo "IMAGE_TAG: $IMAGE_TAG"
+          
+          # Ensure variables are set
+          if [[ -z "$ECR_REGISTRY" || -z "$ECR_REPOSITORY" ]]; then
+            echo "Error: ECR_REGISTRY or ECR_REPOSITORY is empty"
+            exit 1
+          fi
+          
+          # Build and push the image with explicit build context
+          docker buildx build --platform linux/amd64 -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --push --file Dockerfile .
+          
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      
